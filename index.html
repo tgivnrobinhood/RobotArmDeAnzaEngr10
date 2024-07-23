@@ -11,34 +11,43 @@
 
         <h1>Communicating from Node.js to an Arduino Prototype</h1>
 
+        <h2>Macro Control</h2>
+
         <button id="servo1To180">180</button>
         <button id="servo1To0">0</button>
 
+        <h2>Manual Control</h2>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+          </div>
         <button id="lightOn">Light On</button>
         <button id="lightOff">Light Off</button>
-
+        
         <script>
-            
+        
+        // Update the current slider value (each time you drag the slider handle)
+        document.getElementById("myRange").oninput = function() {
+            socket.emit('dataIn', { "status":"!1:"+this.value.toString() });
+        }
+        
         var socket = io();
 
         document.getElementById('servo1To180').onclick = function() {
             
-            socket.emit('dataIn', { "status":"1" });         
+            socket.emit('dataIn', { "status":"!1:1" });         
         };
             
         document.getElementById('servo1To0').onclick = function(){
                
-            socket.emit('dataIn', { "status":"0" });         
+            socket.emit('dataIn', { "status":"!1:0" });         
         };
 
-        document.getElementById('lightOn').onclick = function(){
-            console.log("Test");   
-            socket.emit('dataIn', { "status":"I" });  
+        document.getElementById('lightOn').onclick = function(){   
+            socket.emit('dataIn', { "status":"!1:I" });  
         };
 
-        document.getElementById('lightOff').onclick = function(){
-            console.log("Test");      
-            socket.emit('dataIn', { "status":"O" });
+        document.getElementById('lightOff').onclick = function(){      
+            socket.emit('dataIn', { "status":"!0:O" });
         };
         
         </script>

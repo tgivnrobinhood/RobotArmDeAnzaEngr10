@@ -37,7 +37,7 @@ io.on('connection', function(socket) {
     
     socket.on('dataIn',function(data){
         
-        console.log( data );
+        console.log( data);
         
         port.write( data.status );
     

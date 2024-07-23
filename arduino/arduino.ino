@@ -1,5 +1,7 @@
 #include <Servo.h>
- 
+#include <bits/stdc++.h> 
+using namespace std;  
+
 Servo servo1;
 int pinNum = 10;
 
@@ -23,9 +25,11 @@ void loop() {
     
     // Loop through received data and append to the receivedString variable
     while (Serial.available() > 0) {
-      receivedString += char(Serial.read ());
+      receivedString += Serial.readString();
     }
     
+    char input[receivedString.length()+1]= strcpy(receivedString.c_str());
+
     // Print received Serial data
     //Serial.println(receivedString);
     
