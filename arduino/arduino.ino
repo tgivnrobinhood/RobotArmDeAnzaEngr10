@@ -1,9 +1,12 @@
 #include <Servo.h>
  
 Servo servo1;
+int pinNum = 10;
 
 void setup() 
 { 
+  pinMode(pinNum, OUTPUT);
+
   servo1.attach(22);
   // Initialize the Serial
   Serial.begin(9600);
@@ -34,6 +37,12 @@ void loop() {
     else if(receivedString == "0"){
       servo1.write(0);
       Serial.print(receivedString);
+    } 
+    else if(receivedString == "I"){
+      digitalWrite(pinNum, HIGH);
+    } 
+    else if(receivedString == "O"){
+      digitalWrite(pinNum, LOW);
     } 
   }
 

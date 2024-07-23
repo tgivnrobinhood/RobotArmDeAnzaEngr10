@@ -9,7 +9,9 @@ const parser = new parsers.Readline({
     delimiter: '\r\n'
 });
 
-var port = new SerialPort('/dev/cu.usbmodem1101',{ 
+//1101 for Leo Song's macbook
+//14301 for Leo Song's pc
+var port = new SerialPort('/dev/cu.usbmodem14301',{ 
     baudRate: 9600,
     dataBits: 8,
     parity: 'none',
@@ -33,7 +35,7 @@ var io = require('socket.io').listen(app);
 
 io.on('connection', function(socket) {
     
-    socket.on('servo1',function(data){
+    socket.on('dataIn',function(data){
         
         console.log( data );
         
