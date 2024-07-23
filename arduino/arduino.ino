@@ -24,14 +24,17 @@ void loop() {
     }
     
     // Print received Serial data
-    Serial.println(receivedString);
+    //Serial.println(receivedString);
     
-    // Change LED status based on received data
-    if(receivedString == "1")
+    // status based on received data
+    if(receivedString == "1"){
       servo1.write(180); 
-    else
+      Serial.print(receivedString);
+    } 
+    else if(receivedString == "0"){
       servo1.write(0);
-    
+      Serial.print(receivedString);
+    } 
   }
 
 }
