@@ -1,6 +1,6 @@
 #include <Servo.h>
-#include <bits/stdc++.h> 
-#include <stdexcept>
+
+
 
 using namespace std;  
 
@@ -37,19 +37,19 @@ void loop() {
     }
     
     //kinda undoes the thing from before ill make this better later
-    char input[receivedString.length()+1]= strcpy(receivedString.c_str());
+    char inputChar[receivedString.length()+1]= {receivedString.c_str()};
 
     //goes through the array to find the strings for each command
-    for(int i =0; i<input.length(); i+=6){
+    for(int i =0; i<inputChar.size(); i+=6){
       //ensures its reading it properly
-      if(input[i] != '!'){
+      if(inputChar[i] != '!'){
         throw std::invalid_argument("received incompatible data");
       }
       //finds what command
-      switch(intput[i+1]){
+      switch(intputChar[i+1]){
         //control servo 1
         case '1':
-          String str = input[i+3] + intout[i+4]+input[i+5];
+          String str = inputChar[i+3] + intputChar[i+4]+inputChar[i+5];
           moveServo1(atoi(str));
           break;
         //control the led
