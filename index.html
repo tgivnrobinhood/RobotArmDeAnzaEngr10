@@ -26,28 +26,46 @@
         <script>
         
         // Update the current slider value (each time you drag the slider handle)
+        function setIntString(int){
+            if(typeof int != "number"){
+                return new Error("setIntString received a non-numer");
+            }
+            if(int >=1000 || int - Math.floor(int) != 0){
+                return new Error("setIntString received an invalid number")
+            }
+
+            if(int < 10){
+                return "0"+"0"+int.toString();
+            }else if(int <100){
+                return "0"+int.toString();
+            }else{
+                return int.toString();
+            }
+        }
+
         document.getElementById("myRange").oninput = function() {
-            socket.emit('dataIn', { "status":"!1:"+this.value.toString() });
+
+            socket.emit('dataIn', { "status":"!1:"+setIntString(this.value) });
         }
         
         var socket = io();
 
         document.getElementById('servo1To180').onclick = function() {
             
-            socket.emit('dataIn', { "status":"!1:1" });         
+            socket.emit('dataIn', { "status":"!1:180" });         
         };
             
         document.getElementById('servo1To0').onclick = function(){
                
-            socket.emit('dataIn', { "status":"!1:0" });         
+            socket.emit('dataIn', { "status":"!1:000" });         
         };
 
         document.getElementById('lightOn').onclick = function(){   
-            socket.emit('dataIn', { "status":"!1:I" });  
+            socket.emit('dataIn', { "status":"!L:III" });  
         };
 
         document.getElementById('lightOff').onclick = function(){      
-            socket.emit('dataIn', { "status":"!0:O" });
+            socket.emit('dataIn', { "status":"!L:OOO" });
         };
         
         </script>
