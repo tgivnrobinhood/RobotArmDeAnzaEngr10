@@ -1,28 +1,34 @@
 <!doctype html>
-<html>
+<html >
+    
     <head>
 
         <title>Robot Arm</title>
         
         <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
-
+        
+        <link href="styles/style.css" rel="stylesheet" />
     </head>
     <body>
-
-        <h1>Communicating from Node.js to an Arduino Prototype</h1>
+        
+          
+        <!--<h1 style="text-align:center;">Communicating from Node.js to an Arduino Prototype</h1> -->
 
         <h2>Macro Control</h2>
 
+        
+
+        <h2>Manual Control</h2>
         <button id="servo1To180">180</button>
         <button id="servo1To0">0</button>
 
-        <h2>Manual Control</h2>
         <div class="slidecontainer">
             <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
           </div>
         <button id="lightOn">Light On</button>
         <button id="lightOff">Light Off</button>
         
+        <p>Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
         <script>
         
         // Update the current slider value (each time you drag the slider handle)
