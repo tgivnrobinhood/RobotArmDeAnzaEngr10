@@ -6,6 +6,12 @@ using namespace std;
 
 //defines servo objects
 Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+Servo servo5;
+Servo servo6;
+
 
 //defines pin for led used for testing
 int pinNum = 10;
@@ -40,21 +46,22 @@ void loop() {
     char inputChar[receivedString.length()+1]= {receivedString.c_str()};
 
     //goes through the array to find the strings for each command
-    for(int i =0; i<inputChar.size(); i+=6){
+    for(int i =0; i<sizeof(inputChar)/sizeof(inputChar[0]); i+=6){
       //ensures its reading it properly
       if(inputChar[i] != '!'){
-        throw std::invalid_argument("received incompatible data");
+        //bad
       }
       //finds what command
-      switch(intputChar[i+1]){
+      switch(inputChar[i+1]){
         //control servo 1
         case '1':
-          String str = inputChar[i+3] + intputChar[i+4]+inputChar[i+5];
+          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+
           moveServo1(atoi(str));
           break;
         //control the led
         case 'L':
-          if(input[i+3] == 'I'){
+          if(inputChar[i+3] == 'I'){
             digitalWrite(pinNum, HIGH);
           }else{
             digitalWrite(pinNum, LOW);
