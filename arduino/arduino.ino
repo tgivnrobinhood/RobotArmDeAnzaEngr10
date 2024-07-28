@@ -22,8 +22,13 @@ void setup()
   pinMode(pinNum, OUTPUT);
 
   //sets pins for servo objects
-
   servo1.attach(22);
+  servo2.attach(23);
+  servo3.attach(24);
+  servo4.attach(25);
+  servo5.attach(26);
+  servo6.attach(27);
+
   // Initialize the Serial
   Serial.begin(9600);
   
@@ -56,9 +61,10 @@ void loop() {
         //control servo 1
         case '1':
           char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
-
-          moveServo1(atoi(str));
+          moveServo(servo1, atoi(str));
           break;
+        
+        
         //control the led
         case 'L':
           if(inputChar[i+3] == 'I'){
@@ -76,7 +82,22 @@ void loop() {
 
 }
 
-boolean moveServo1(int degree){
-  servo1.write(degree);
+//moves servo in a less violent way
+boolean moveServo(Servo servo, int degree){
+  const int timing = 10;
+
+  if(servo.read() == degree){
+    //do nothing
+  }else if(servo.read()>degree){
+    for(int i = servo.read()+1; i<=degree; i++){
+      servo.write(i);
+      delay(timing);
+    }
+  }else{
+    for(int i = servo.read()-1; i>=degree; i--){
+      servo.write(i);
+      delay(timing);
+    }
+  }
   return true;
 }
