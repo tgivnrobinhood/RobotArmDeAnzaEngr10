@@ -1,7 +1,5 @@
 #include <Servo.h>
 
-
-
 using namespace std;  
 
 //defines servo objects
