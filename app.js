@@ -11,7 +11,9 @@ const parser = new parsers.Readline({
 
 //1101 for Leo Song's macbook
 //14301 for Leo Song's pc
-var port = new SerialPort('/dev/cu.usbmodem1101',{ 
+
+
+var port = new SerialPort('/dev/cu.usbmodem14301',{ 
     baudRate: 9600,
     dataBits: 8,
     parity: 'none',
@@ -19,12 +21,15 @@ var port = new SerialPort('/dev/cu.usbmodem1101',{
     flowControl: false
 });
 
+
 port.open(function (err) {
     if (err) {
       return console.log('Error opening port: ', err.message)
     }})
 
 port.pipe(parser);
+
+
 
 var app = http.createServer(function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});

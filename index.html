@@ -1,29 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html >
     
     <head>
-
+        <meta charset="UTF-8">   
         <title>Robot Arm</title>
         
         <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
         
-        <link href="styles/style.css" rel="stylesheet" />
     </head>
     <body>
         
           
-        <!--<h1 style="text-align:center;">Communicating from Node.js to an Arduino Prototype</h1> -->
+        <h1 style="text-align:center;">Communicating from Node.js to an Arduino Prototype</h1>
 
         <h2>Macro Control</h2>
-
-        
 
         <h2>Manual Control</h2>
         <button id="servo1To180">180</button>
         <button id="servo1To0">0</button>
 
         <div class="slidecontainer">
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <input type="range" min="0" max="180" value="90" class="slider" id="myRange">
           </div>
         <button id="lightOn">Light On</button>
         <button id="lightOff">Light Off</button>
@@ -33,20 +30,23 @@
         
         // Update the current slider value (each time you drag the slider handle)
         function setIntString(int){
-            if(typeof int != "number"){
-                return new Error("setIntString received a non-numer");
-            }
-            if(int >=1000 || int - Math.floor(int) != 0){
-                return new Error("setIntString received an invalid number")
-            }
+            try{
+                if(int >=1000 || int - Math.floor(int) != 0){
+                    return new Error("setIntString received an invalid number")
+                }
 
-            if(int < 10){
-                return "0"+"0"+int.toString();
-            }else if(int <100){
-                return "0"+int.toString();
-            }else{
-                return int.toString();
+                if(int < 10){
+                    return "0"+"0"+int.toString();
+                }else if(int <100){
+                    return "0"+int.toString();
+                }else{
+                    return int.toString();
+                }
             }
+            catch(err){
+                
+            }
+            return new Error("setIntString received a non-numer");
         }
 
         document.getElementById("myRange").oninput = function() {
