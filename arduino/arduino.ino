@@ -10,6 +10,8 @@ Servo servo4;
 Servo servo5;
 Servo servo6;
 
+Servo claw;
+
 
 //defines pin for led used for testing
 int pinNum = 10;
@@ -26,6 +28,8 @@ void setup()
   servo4.attach(25);
   servo5.attach(26);
   servo6.attach(27);
+
+  claw = servo6;
 
   // Initialize the Serial
   Serial.begin(9600);
@@ -56,7 +60,9 @@ void loop() {
       }
       //finds what command
       switch(inputChar[i+1]){
-        //control servo 1
+        //***************** Manual Control **************
+
+        //control servo 1,2,3,4,5,6 individually 
         case '1':
           char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo1, atoi(str));
@@ -82,6 +88,18 @@ void loop() {
           moveServo(servo6, atoi(str));
           break;
         
+        //***************** Automatic Control **************
+        case 'A':
+          autoMove(inputChar[i+3],inputChar[i+4],inputChar[i+5]);
+          break;
+
+        //***************** Claw Control **************
+        case 'C':
+          closeClaw();
+          break;
+        case 'O':
+          openClaw();
+
         //control the led
         case 'L':
           if(inputChar[i+3] == 'I'){
@@ -117,4 +135,15 @@ boolean moveServo(Servo servo, int degree){
     }
   }
   return true;
+}
+
+boolean autoMove(char char1, char char2, char char3){
+  return true; 
+}
+
+boolean closeClaw(){
+  moveServo(claw, 180);
+}
+boolean openClaw(){
+  moveServo(claw, 90);
 }

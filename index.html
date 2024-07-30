@@ -5,19 +5,30 @@
         <meta charset="UTF-8">   
         <title>Robot Arm</title>
         
+        <!--Installs socket-->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
+        <!--This doesnt work. need to do something complicated. might just not-->
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         
-          
+        <!--*****************Title*****************-->  
         <h1 style="text-align:center;">Communicating from Node.js to an Arduino Prototype</h1>
-        <p>Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
+        <p style="text-align:center;">Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
 
+        <!--*****************Macro Controls*****************-->
         <h2>Macro Control</h2>
 
+        <!--*****************Claw Controls*****************-->
+        <h3>Claw Control</h3>
+        <button id="closeClaw">Close Claw</button>
+        <button id="openClaw">Open Claw</button>
+
+        <!--*****************Manual Controls*****************-->
         <h2>Manual Control</h2>
 
+        <!--Each block controls one servo. each has a button to each end + slider-->
         <div style="float: left;"> 
         <h3>Servo 1</h3>
         <button id="servo1To180">180</button>
@@ -74,18 +85,29 @@
           </div>
         </div>
         
+        <!--*****************Light Control*****************-->
         <div style="clear: both">
         <h2>Light Control</h2>
         <button id="lightOn">Light On</button>
         <button id="lightOff">Light Off</button>
         </div>
-        <script>
-        
-        
 
-        
-        
+
+        <!--***************** Code **************-->
+        <script>
         var socket = io();
+
+        //***************** Claw Control Code **************
+        document.getElementById('openClaw').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!O:XXX" });         
+        };
+        document.getElementById('closeClaw').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!C:XXX" });         
+        };
+        
+        //***************** Manual Controls **************
 
         //Servo 1 Manual Control
         document.getElementById('servo1To180').onclick = function() {
@@ -180,7 +202,7 @@
             socket.emit('dataIn', { "status":"!L:OOO" });
         };
         
-        // Update the current slider value (each time you drag the slider handle)
+        //changes integers into a 3 digit string
         function setIntString(int){
             try{
                 if(int >=1000 || int - Math.floor(int) != 0){
