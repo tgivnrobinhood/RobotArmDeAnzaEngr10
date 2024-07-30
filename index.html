@@ -1,33 +1,184 @@
 <!DOCTYPE html>
 <html >
     
-    <head>
+    <head  >
         <meta charset="UTF-8">   
         <title>Robot Arm</title>
         
         <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
-        
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
         
           
         <h1 style="text-align:center;">Communicating from Node.js to an Arduino Prototype</h1>
-        <p style="text-align:center;">Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
+        <p>Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
 
         <h2>Macro Control</h2>
 
         <h2>Manual Control</h2>
+
+        <div style="float: left; padding: 15px;"> 
+        <h3>Servo 1</h3>
         <button id="servo1To180">180</button>
         <button id="servo1To0">0</button>
-
         <div class="slidecontainer">
-            <input type="range" min="0" max="180" value="90" class="slider" id="myRange">
+            <input type="range" min="0" max="180" value="90" class="slider" id="range1">
           </div>
+
+        </div>
+
+        <div style="float: left"> 
+        <h3>Servo 2</h3>
+        <button id="servo2To180">180</button>
+        <button id="servo2To0">0</button>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="180" value="90" class="slider" id="range2">
+          </div>
+        </div>
+
+        <div style="float: left"> 
+        <h3>Servo 3</h3>
+        <button id="servo3To180">180</button>
+        <button id="servo3To0">0</button>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="180" value="90" class="slider" id="range3">
+          </div>
+        </div>
+
+
+        <div style="float: left"> 
+        <h3>Servo 4</h3>
+        <button id="servo4To180">180</button>
+        <button id="servo4To0">0</button>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="180" value="90" class="slider" id="range4">
+          </div>
+        </div>
+
+        <div style="float: left"> 
+        <h3>Servo 5</h3>
+        <button id="servo5To180">180</button>
+        <button id="servo5To0">0</button>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="180" value="90" class="slider" id="range5">
+          </div>
+        </div>
+
+        <div style="float: left"> 
+        <h3>Servo 6</h3>
+        <button id="servo6To180">180</button>
+        <button id="servo6To0">0</button>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="180" value="90" class="slider" id="range6">
+          </div>
+        </div>
+        
+        <div style="clear: both">
+        <h2>Light Control</h2>
         <button id="lightOn">Light On</button>
         <button id="lightOff">Light Off</button>
-        
-        <p>Project members: Aiden, Leo, Neil, Douglas, Brandon</p>
+        </div>
         <script>
+        
+        
+
+        
+        
+        var socket = io();
+
+        //Servo 1 Manual Control
+        document.getElementById('servo1To180').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!1:180" });         
+        };
+        document.getElementById('servo1To0').onclick = function(){
+               
+            socket.emit('dataIn', { "status":"!1:000" });         
+        };
+        document.getElementById("range1").oninput = function() {
+
+            socket.emit('dataIn', { "status":"!1:"+setIntString(this.value) });
+        }
+
+        //Servo 2 Manual Control
+        document.getElementById('servo2To180').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!2:180" });         
+        };
+        document.getElementById('servo2To0').onclick = function(){
+               
+            socket.emit('dataIn', { "status":"!2:000" });         
+        };
+        document.getElementById("range2").oninput = function() {
+
+            socket.emit('dataIn', { "status":"!2:"+setIntString(this.value) });
+        }
+
+        //Servo 3 Manual Control
+        document.getElementById('servo3To180').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!3:180" });         
+        };
+        document.getElementById('servo3To0').onclick = function(){
+               
+            socket.emit('dataIn', { "status":"!3:000" });         
+        };
+        document.getElementById("range3").oninput = function() {
+
+            socket.emit('dataIn', { "status":"!3:"+setIntString(this.value) });
+        }
+
+        //Servo 4 Manual Control
+        document.getElementById('servo4To180').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!4:180" });         
+        };
+        document.getElementById('servo4To0').onclick = function(){
+               
+            socket.emit('dataIn', { "status":"!4:000" });         
+        };
+        document.getElementById("range4").oninput = function() {
+
+            socket.emit('dataIn', { "status":"!4:"+setIntString(this.value) });
+        }
+
+        //Servo 5 Manual Control
+        document.getElementById('servo5To180').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!5:180" });         
+        };
+        document.getElementById('servo5To0').onclick = function(){
+               
+            socket.emit('dataIn', { "status":"!5:000" });         
+        };
+        document.getElementById("range5").oninput = function() {
+
+            socket.emit('dataIn', { "status":"!5:"+setIntString(this.value) });
+        }
+
+        //Servo 6 Manual Control
+        document.getElementById('servo6To180').onclick = function() {
+            
+            socket.emit('dataIn', { "status":"!6:180" });         
+        };
+        document.getElementById('servo6To0').onclick = function(){
+               
+            socket.emit('dataIn', { "status":"!6:000" });         
+        };
+        document.getElementById("range6").oninput = function() {
+
+            socket.emit('dataIn', { "status":"!6:"+setIntString(this.value) });
+        }
+
+        //Lights Manual Control
+        document.getElementById('lightOn').onclick = function(){   
+            socket.emit('dataIn', { "status":"!L:III" });  
+        };
+
+        document.getElementById('lightOff').onclick = function(){      
+            socket.emit('dataIn', { "status":"!L:OOO" });
+        };
         
         // Update the current slider value (each time you drag the slider handle)
         function setIntString(int){
@@ -49,32 +200,6 @@
             }
             return new Error("setIntString received a non-numer");
         }
-
-        document.getElementById("myRange").oninput = function() {
-
-            socket.emit('dataIn', { "status":"!1:"+setIntString(this.value) });
-        }
-        
-        var socket = io();
-
-        document.getElementById('servo1To180').onclick = function() {
-            
-            socket.emit('dataIn', { "status":"!1:180" });         
-        };
-            
-        document.getElementById('servo1To0').onclick = function(){
-               
-            socket.emit('dataIn', { "status":"!1:000" });         
-        };
-
-        document.getElementById('lightOn').onclick = function(){   
-            socket.emit('dataIn', { "status":"!L:III" });  
-        };
-
-        document.getElementById('lightOff').onclick = function(){      
-            socket.emit('dataIn', { "status":"!L:OOO" });
-        };
-        
         </script>
         
     </body>
