@@ -22,6 +22,8 @@ void setup()
   pinMode(pinNum, OUTPUT);
 
   //sets pins for servo objects
+  //set as sequential order starting from the first digital pin
+  //might be better to use just the outer ones
   servo1.attach(22);
   servo2.attach(23);
   servo3.attach(24);
@@ -29,7 +31,7 @@ void setup()
   servo5.attach(26);
   servo6.attach(27);
 
-  claw = servo6;
+  claw = servo6; //assumes the claw is servo6
 
   // Initialize the Serial
   Serial.begin(9600);
