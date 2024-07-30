@@ -61,7 +61,26 @@ void loop() {
           char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo1, atoi(str));
           break;
-        
+        case '2':
+          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          moveServo(servo2, atoi(str));
+          break;
+        case '3':
+          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          moveServo(servo3, atoi(str));
+          break;
+        case '4':
+          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          moveServo(servo4, atoi(str));
+          break;
+        case '5':
+          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          moveServo(servo5, atoi(str));
+          break;
+        case '6':
+          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          moveServo(servo6, atoi(str));
+          break;
         
         //control the led
         case 'L':
