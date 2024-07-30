@@ -1,6 +1,7 @@
-#include <Servo.h>
+//imports servo library to control servos
+#include <Servo.h> //ignore the error it works in arduino.ide
 
-using namespace std;  
+using namespace std;  //for the c++ stuff
 
 //defines servo objects
 Servo servo1;
@@ -10,7 +11,7 @@ Servo servo4;
 Servo servo5;
 Servo servo6;
 
-Servo claw;
+Servo claw; //specifically for the claw cause it has different controls 
 
 
 //defines pin for led used for testing
