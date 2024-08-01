@@ -53,10 +53,13 @@ void loop() {
     }
     
     //kinda undoes the thing from before ill make this better later
-    char inputChar[receivedString.length()+1]= {receivedString.c_str()};
+    //char inputChar[receivedString.length()+1]= {receivedString.c_str()}; //this is like giving an error i think 
+    char inputChar[receivedString.length()+1] = new char[];
+    strcopy(inputChar, receivedString.c_str());
 
     //goes through the array to find the strings for each command
     for(int i =0; i<sizeof(inputChar)/sizeof(inputChar[0]); i+=6){
+      Serial.print(receivedString);
       //ensures its reading it properly
       if(inputChar[i] != '!'){
         //bad
@@ -66,28 +69,30 @@ void loop() {
         //***************** Manual Control **************
 
         //control servo 1,2,3,4,5,6 individually 
+        char* str;
         case '1':
-          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo1, atoi(str));
+          Serial.write("works");
           break;
         case '2':
-          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo2, atoi(str));
           break;
         case '3':
-          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo3, atoi(str));
           break;
         case '4':
-          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo4, atoi(str));
           break;
         case '5':
-          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo5, atoi(str));
           break;
         case '6':
-          char* str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
+          str = inputChar[i+3] + inputChar[i+4] + inputChar[i+5];
           moveServo(servo6, atoi(str));
           break;
         
@@ -105,6 +110,7 @@ void loop() {
 
         //control the led
         case 'L':
+          Serial.write("lights work");
           if(inputChar[i+3] == 'I'){
             digitalWrite(pinNum, HIGH);
           }else{

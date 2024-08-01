@@ -13,7 +13,7 @@ const parser = new parsers.Readline({
 //14301 for Leo Song's pc
 
 
-var port = new SerialPort('/dev/cu.usbmodem14301',{ 
+var port = new SerialPort('/dev/cu.usbmodem1101',{ 
     baudRate: 9600,
     dataBits: 8,
     parity: 'none',
