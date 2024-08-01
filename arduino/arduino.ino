@@ -127,18 +127,22 @@ void loop() {
 }
 
 //moves servo in a less violent way
-boolean moveServo(Servo servo, int degree){
+boolean moveServo(Servo &servo, int degree){
   const int timing = 10;
-
-  if(servo.read() == degree){
+  currentpos= servo.read()
+    
+  if(currentpos == degree){
     //do nothing
-  }else if(servo.read()>degree){
-    for(int i = servo.read()+1; i<=degree; i++){
+    return true;
+  }
+  
+  if(currentpos>degree){
+    for(int i = currentpos + 1; i<=degree; i++){
       servo.write(i);
       delay(timing);
     }
   }else{
-    for(int i = servo.read()-1; i>=degree; i--){
+    for(int i = currentpos - 1; i>=degree; i--){
       servo.write(i);
       delay(timing);
     }
